@@ -1,5 +1,16 @@
-def getInput():
-    with open("inp01.txt") as f:
+import argparse
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Advent of Code 2021 Day 1')
+    parser.add_argument('-f', '--filename', metavar='FILENAME', type=str, help='name of input file', default='inp01.txt')
+    args = parser.parse_args()
+    return args
+
+
+
+def getInput(filename):
+    with open(filename) as f:
         lines = f.readlines()
         lines = [int(line.rstrip()) for line in lines]
         return lines
@@ -14,6 +25,7 @@ def answer1(inp):
     return count
 
 
+
 def answer2(inp):
     count = 0
     for i in range(3, len(inp)):
@@ -24,11 +36,14 @@ def answer2(inp):
     return count
 
 
+
 def main():
-    inp = getInput()
+    args = parse_args()
+    inp = getInput(args.filename)
     a1, a2 = answer1(inp), answer2(inp)
     print("Answer 1:", a1)
     print("Answer 2:", a2)
+
 
 
 if __name__ == '__main__':
